@@ -1,3 +1,4 @@
+#line 1 "C:\\Users\\bogda\\Documents\\Coding\\ProiectLicenta\\SolarPanelEnergyManagement\\Arduino\\main\\modules\\photoresistorSensor\\ldr.cpp"
 #include "ldr.h"
 
 LDRSensor::LDRSensor(int LDRpin) {

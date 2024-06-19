@@ -1,0 +1,7 @@
+{
+    "board": "arduino:avr:uno",
+    "sketch": "main/main.ino",
+    "port": "COM6",
+    "output": "./build",
+    "programmer": "usbasp"
+}

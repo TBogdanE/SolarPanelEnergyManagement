@@ -3,16 +3,17 @@
 
 TemperatureSensor::TemperatureSensor(int pin, int type) : _pin(pin), _type(type), _dht(pin, type) {}
 
-void TemperatureSensor::begin() {
+void TemperatureSensor::begin()
+{
     _dht.begin();
 }
 
-float TemperatureSensor::readTemperature() {
+float TemperatureSensor::readTemperature()
+{
     return _dht.readTemperature();
 }
 
-float TemperatureSensor::readHumidity() {
+float TemperatureSensor::readHumidity()
+{
     return _dht.readHumidity();
 }
-
-
