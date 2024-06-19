@@ -9,6 +9,8 @@
 #include "modules/infraredSensor/infrared.cpp"
 #include "modules/voltageSensor/voltageSensor.h"
 #include "modules/voltageSensor/voltageSensor.cpp"
+#include "modules/currentSensor/currentSensor.h"
+#include "modules/currentSensor/currentSensor.cpp"
 
 #define DHT_PIN 9
 #define DHT_TYPE DHT11
@@ -16,12 +18,14 @@
 #define THER_PIN A3
 #define IR_PIN A4
 #define V_PIN A0
+#define CURR_PIN A5
 
 TemperatureSensor tempSensor(DHT_PIN, DHT_TYPE);
 LDRSensor ldrSensor(LDR_PIN);
 ThermistorSensor thermSensor(THER_PIN);
 InfraredSensor irSensor(IR_PIN);
 VoltageSensor vSensor(V_PIN);
+CurrentSensor aSensor(CURR_PIN);
 
 class Data
 {
@@ -61,7 +65,8 @@ void loop()
     systemData.brightnessValue = thermSensor.readTemperature();
     systemData.brightnessValue = thermSensor.readTemperature();
     systemData.voltageValue = vSensor.getVoltage();
-    Serial.print(systemData.voltageValue);
+    systemData.currentValue = aSensor.getCurrent();
+    Serial.println(systemData.currentValue);
 
     /*Serial.print("Temperature: ");
     Serial.print(systemData.temperatureValue);
@@ -72,6 +77,7 @@ void loop()
     Serial.print(systemData.brightnessValue);
     Serial.println(" °C");
     Serial.print(irSensor.getWindSpeed());
+    Serial.print(systemData.voltageValue);
     */
 
     delay(2000); // Adjust delay as needed
