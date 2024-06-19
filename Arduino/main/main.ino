@@ -1,11 +1,15 @@
 #include <Arduino.h>
 #include "modules/temperatureSensor/temperature.h"
 #include "modules/temperatureSensor/temperature.cpp"
+#include "modules/photoresistorSensor/ldr.h"
+#include "modules/photoresistorSensor/ldr.cpp"
 
 #define DHT_PIN 9
 #define DHT_TYPE DHT11
+#define LDR_PIN A1
 
 TemperatureSensor tempSensor(DHT_PIN, DHT_TYPE);
+LDRSensor ldrSensor(LDR_PIN);
 
 class Data {
 
@@ -35,17 +39,18 @@ void setup() {
 }
 
 void loop() {
-    float temperature = tempSensor.readTemperature();
-    systemData.temperatureValue = temperature;
-    float humidity = tempSensor.readHumidity();
+    systemData.temperatureValue = tempSensor.readTemperature();
+    systemData.humidityValue = tempSensor.readHumidity();
+    systemData.brightnessValue = ldrSensor.getLDRPercentage();
 
-    Serial.print("Temperature: ");
-    Serial.print(temperature);
-    Serial.print("TempratureInClass:");
+    /*Serial.print("Temperature: ");
     Serial.print(systemData.temperatureValue);
     Serial.print(" °C, Humidity: ");
-    Serial.print(humidity);
-    Serial.println(" %");
+    Serial.print(systemData.humidityValue);
+    Serial.println(" %");*/
+    Serial.print("LDR Value: ");
+    Serial.print(systemData.brightnessValue);
+
 
     delay(2000);  // Adjust delay as needed
 }
